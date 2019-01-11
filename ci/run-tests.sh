@@ -12,6 +12,8 @@
 # express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
+## NOTE: This script should be run on Go version 1.11.3 or greater
+
 set -e
 
 readonly REPO="github.com/morningconsult/docker-credential-vault-login"

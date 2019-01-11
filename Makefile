@@ -63,9 +63,13 @@ build_mocks: mocktools
 	scripts/build-mocks.sh
 .PHONY: build_mocks
 
-install_dep:
-	@curl --silent https://raw.githubusercontent.com/golang/dep/master/install.sh | sh > /dev/null
-.PHONY: install_dep
+# install_dep:
+# 	@curl --silent https://raw.githubusercontent.com/golang/dep/master/install.sh | sh > /dev/null
+# .PHONY: install_dep
+
+update_deps:
+	@GO111MODULE=on go mod tidy -v
+.PHONY: update_deps
 
 #=============================================================================
 # Release and Deployment tasks

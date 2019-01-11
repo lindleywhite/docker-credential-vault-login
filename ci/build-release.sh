@@ -32,13 +32,13 @@ wget --quiet -O /tmp/goreleaser.tar.gz https://github.com/goreleaser/goreleaser/
 tar xzf /tmp/goreleaser.tar.gz -C /tmp
 mv /tmp/goreleaser /usr/local/bin
 
-mkdir -p "${GOPATH}/src/${PROJECT}"
-cp -r . "${GOPATH}/src/${PROJECT}"
-cd "${GOPATH}/src/${PROJECT}"
+# mkdir -p "${GOPATH}/src/${PROJECT}"
+# cp -r . "${GOPATH}/src/${PROJECT}"
+# cd "${GOPATH}/src/${PROJECT}"
 
-echo "==> Installing dep"
+# echo "==> Installing dep"
 
-make install_dep
+# make install_dep
 
 echo "==> Fetching dependencies. This may take some time."
 

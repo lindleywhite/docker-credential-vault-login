@@ -12,6 +12,8 @@
 # express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
+## NOTE: This script should be run on Go version 1.11.3 or greater
+
 set -e
 
 ROOT=$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )
@@ -22,27 +24,12 @@ if [ -z $( which go ) ]; then
 	exit 1
 fi
 
-if [ -z $( echo "${GOPATH}" ) ]; then
-	echo "Your GOPATH is not set. Please set the GOPATH before executing this script."
-	exit 1
-fi
-
 BIN_DIR="${ROOT}/${1}"
 TAG="${2}"
 HASH="${3}"
 REPO="${4}"
 
 cd "${ROOT}"
-
-# Install dep if it isn't already installed
-if [ -z $( which dep ) ]; then
-	export GOBIN="${GOPATH}/bin"
-	export PATH="${PATH}:${GOBIN}"
-	curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-fi
-
-# Fetch dependencies
-dep ensure
 
 # Set ldflags
 version_ldflags="-X \"${REPO}/version.Date=$( date +"%b %d, %Y" )\""
@@ -57,7 +44,7 @@ fi
 
 mkdir -p "${BIN_DIR}"
 
-CGO_ENABLED=0 go build \
+CGO_ENABLED=0 GO111MODULE=on go build \
 	-installsuffix cgo \
 	-a \
 	-ldflags "-s -w ${version_ldflags}" \
